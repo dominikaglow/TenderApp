@@ -23,10 +23,6 @@ const Offer = conn.define('offer', {
     sum: {
         type: DataTypes.INTEGER,
         defaultValue: 0
-    },
-    date: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
     }
 });
 

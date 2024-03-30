@@ -1,3 +1,4 @@
+import { default as Axios } from 'axios';
 import './AddTender.css';
 import { useState } from 'react';
 
@@ -10,8 +11,17 @@ function AddTender() {
     const [endDate, setEndDate] = useState('');
     const [budget, setBudget] = useState(0);
 
-    const displayInfo = () => {
-        console.log(startDate);
+    const addTender = () => {
+      Axios.post("http://localhost:5001/createTender", {
+        subject: subject,
+        institution: institution,
+        description: desc,
+        startDate: startDate,
+        endDate: endDate,
+        budget: budget
+      }).then(() => {
+        console.log("Success sending new tender");
+      });
     };
 
     return (
@@ -45,6 +55,7 @@ function AddTender() {
           <label>Start date </label>
           <input 
             type="datetime-local"
+            lang="en"
             onChange={(event) => {
                 setStartDate(event.target.value);
             }}
@@ -53,6 +64,7 @@ function AddTender() {
           <label>End date </label>
           <input 
             type="datetime-local"
+            lang="en"
             onChange={(event) => {
                 setEndDate(event.target.value);
             }}
@@ -66,7 +78,7 @@ function AddTender() {
             }}
           />
 
-          <button onClick={displayInfo}>Add tender</button>
+          <button onClick={addTender}>Add tender</button>
         </div>
       </div>
     );
